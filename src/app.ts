@@ -6,9 +6,9 @@ const app: Application = express()
 
 app.use(express.json())
 
-app.get("/products", logics.create)
+app.get("/products", logics.read)
 
-app.post("/products", middlewares.checkName, logics.read)
+app.post("/products", middlewares.checkName, logics.create)
 
 app.get("/products/:id", middlewares.checkId, logics.retrieve)
 

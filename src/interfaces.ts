@@ -4,7 +4,7 @@ interface Products {
     price: number;
     weight: number;
     section: "food";
-    calories: number | null | undefined;
+    calories?: number | null | undefined;
     expirationDate: Date;
 }
 

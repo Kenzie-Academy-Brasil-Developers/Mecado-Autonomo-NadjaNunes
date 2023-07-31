@@ -3,17 +3,31 @@ import Products from "./interfaces"
 import market from "./database"
 
 const create = (req: Request, res: Response): Response => {
+   
+    const {name, calories, weight, price, section} = req.body;
+
+const today = new Date();
+const expirationDate = new Date(today);
+expirationDate.setDate(today.getDate() + 365);
+   
     const newProducts: Products = {
-        ...req.body,
+        name,
+        calories,
+        weight,
+        section,
+        price,
         id: market.length + 1,
-        createAt: new Date(),
+        expirationDate,
     }
+
     market.push(newProducts)
     return res.status(201).json(newProducts)
 }
 
 const read = (req: Request, res: Response): Response => {
-    return res.status(200).json({ total: market.length, market })
+    const total = market.reduce((acc, item) => acc + item.price, 0)
+   
+    return res.status(200).json({ total: total, products: market})
 }
 
 const retrieve = (req: Request, res: Response): Response  =>{
@@ -29,7 +43,7 @@ const destroy =  (req: Request, res: Response): Response => {
         return res.status(404).json({message: "Product not found."})
     }
     market.splice(productsIndex, 1)
-    return  res.status(204).json()
+    return  res.status(204).end()
 }
 
 const updated =  (req: Request, res: Response): Response => {

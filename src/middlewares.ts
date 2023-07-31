@@ -23,7 +23,7 @@ const checkName = (req: Request, res: Response, next: NextFunction): void | Resp
         (p: Products): boolean => p.name === name
     ))
     if(foundProducts){
-        return res.status(409).json({message: "Product name already exists."})
+        return res.status(409).json({message: "Product already registered."})
     }
     return next()
 }
