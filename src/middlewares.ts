@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response } from "express";
-import Products from "./interfaces";
-import market from "./database";
+import { NextFunction, Request, Response } from "express"
+import Products from "./interfaces"
+import market from "./database"
 
 const checkId = (req: Request, res: Response, next: NextFunction) => {
     const {id} = req.params; 
@@ -15,4 +15,17 @@ const checkId = (req: Request, res: Response, next: NextFunction) => {
     return next()
 }
 
-export default { checkId }
+const checkName = (req: Request, res: Response, next: NextFunction): void | Response => {
+    const {name} = req.body
+    if(!name)
+    return next()
+    const foundProducts: Products | undefined = market.find((
+        (p: Products): boolean => p.name === name
+    ))
+    if(foundProducts){
+        return res.status(409).json({message: "Product name already exists."})
+    }
+    return next()
+}
+
+export default { checkId, checkName }

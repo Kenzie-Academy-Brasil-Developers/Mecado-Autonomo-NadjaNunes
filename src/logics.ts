@@ -38,7 +38,6 @@ const updated =  (req: Request, res: Response): Response => {
         ...market[productsIndex],
         ...req.body,
     })
-
     return  res.status(200).json(updating)
 }
 
