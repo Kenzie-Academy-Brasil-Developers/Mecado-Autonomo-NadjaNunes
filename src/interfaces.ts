@@ -8,4 +8,4 @@ interface Products {
     expirationDate: Date;
 }
 
-export default  Products;
+export default  Products

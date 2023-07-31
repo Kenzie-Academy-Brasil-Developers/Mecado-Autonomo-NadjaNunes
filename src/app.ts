@@ -1,13 +1,21 @@
-import express, { Application, Request, Response, json } from "express"
+import express, { Application} from "express"
+import logics from "./logics"
+import middlewares from "./middlewares"
 
-const app: Application = express();
+const app: Application = express()
 app.use(express.json())
 
-app.get("/products")
+app.get("/products", logics.create)
 
-app.post("/products")
+app.post("/products", logics.read)
 
-const PORT: number = 3000;
+app.get("/products/:id", middlewares.checkId, logics.retrieve)
+
+app.delete("/products/:id", middlewares.checkId, logics.destroy)
+
+app.patch("/products/:id", middlewares.checkId, logics.updated)
+
+const PORT: number = 3000
 app.listen(PORT, (): void => {
     console.log(`Application is running on port ${PORT}`)
 })

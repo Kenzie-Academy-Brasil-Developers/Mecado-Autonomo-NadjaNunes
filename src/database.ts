@@ -1,5 +1,5 @@
-import Products from "./interfaces";
+import Products from "./interfaces"
 
 const market: Array<Products> = []
 
-export default market;
+export default market
