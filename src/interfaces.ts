@@ -3,7 +3,7 @@ interface Products {
     name: string;
     price: number;
     weight: number;
-    section: "food";
+    section: "food" | "cleaning";
     calories?: number | null | undefined;
     expirationDate: Date;
 }
